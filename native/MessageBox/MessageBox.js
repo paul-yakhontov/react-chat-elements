@@ -11,12 +11,42 @@ import {
 
 import {
     format,
-} from'timeago.js';
+} from 'timeago.js';
 
 import IconI from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/MaterialIcons';
 
+
+
 export class MessageBox extends Component {
+
+    timeSince(date) {
+
+        var seconds = Math.floor((new Date() - date) / 1000);
+
+        var interval = Math.floor(seconds / 31536000);
+
+        if (interval > 1) {
+            return interval + " years";
+        }
+        interval = Math.floor(seconds / 2592000);
+        if (interval > 1) {
+            return interval + " months";
+        }
+        interval = Math.floor(seconds / 86400);
+        if (interval > 1) {
+            return interval + " days";
+        }
+        interval = Math.floor(seconds / 3600);
+        if (interval > 1) {
+            return interval + " hours";
+        }
+        interval = Math.floor(seconds / 60);
+        if (interval > 1) {
+            return interval + " minutes";
+        }
+        return Math.floor(seconds) + " seconds";
+    }
 
     render() {
         var positionCls = [
@@ -52,23 +82,23 @@ export class MessageBox extends Component {
                                             this.props.avatar &&
                                             <View
                                                 style={styles.rceMboxTitleAvatar}>
-                                                    <Avatar
-                                                        size={{
-                                                            width: 30,
-                                                            height: 30,
-                                                        }}
-                                                        src={this.props.avatar}/>
+                                                <Avatar
+                                                    size={{
+                                                        width: 30,
+                                                        height: 30,
+                                                    }}
+                                                    src={this.props.avatar} />
                                             </View>
                                         }
                                         <View>
-                                        {
-                                            this.props.title &&
-                                            <Text
-                                                style={[
-                                                    styles.rceMboxTitleText,
-                                                    this.props.titleColor && { color: this.props.titleColor },
-                                                ]}>{this.props.title}</Text>
-                                        }
+                                            {
+                                                this.props.title &&
+                                                <Text
+                                                    style={[
+                                                        styles.rceMboxTitleText,
+                                                        this.props.titleColor && { color: this.props.titleColor },
+                                                    ]}>{this.props.title}</Text>
+                                            }
                                         </View>
                                     </View>
                                 }
@@ -89,14 +119,10 @@ export class MessageBox extends Component {
                                     ]}>
                                     <Text
                                         style={styles.rceMboxTimeText}>
-                                    {
-                                        this.props.date &&
-                                        !isNaN(this.props.date) &&
-                                        (
-                                            this.props.dateString ||
-                                            format(this.props.date)
-                                        )
-                                    }
+                                        {
+                                            this.props.date ?
+                                            this.timeSince(this.props.date)+" ago" : null
+                                        }
                                     </Text>
                                     {
                                         this.props.status &&
@@ -104,22 +130,22 @@ export class MessageBox extends Component {
                                             style={styles.rceMboxStatus}>
                                             {
                                                 this.props.status === 'waiting' &&
-                                                <IconM name='access-time' size={13}/>
+                                                <IconM name='access-time' size={13} />
                                             }
 
                                             {
                                                 this.props.status === 'sent' &&
-                                                <IconM name='check' size={13}/>
+                                                <IconM name='check' size={13} />
                                             }
 
                                             {
                                                 this.props.status === 'received' &&
-                                                <IconI name='md-done-all' size={13}/>
+                                                <IconI name='md-done-all' size={13} />
                                             }
 
                                             {
                                                 this.props.status === 'read' &&
-                                                <IconI name='md-done-all' color='#4FC3F7' size={13}/>
+                                                <IconI name='md-done-all' color='#4FC3F7' size={13} />
                                             }
                                         </Text>
                                     }
