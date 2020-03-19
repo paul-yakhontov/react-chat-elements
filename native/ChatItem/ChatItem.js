@@ -48,12 +48,7 @@ export class ChatItem extends Component {
                                 ellipsizeMode='tail'
                                 numberOfLines={1}>
                                 {
-                                    this.props.date &&
-                                    !isNaN(this.props.date) &&
-                                    (
-                                        this.props.dateString ||
-                                        (this.props.date).toString()
-                                    )
+                                    this.props.date ? this.props.date : null
                                 }
                             </Text>
                         </View>
