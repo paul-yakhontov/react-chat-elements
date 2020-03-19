@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from './AvatarStyle.js';
-
 import {
     View,
     Image,
@@ -14,10 +13,11 @@ export class Avatar extends Component {
             <View style={styles.rceAvatarContainer}>
                 <Image
                     style={[
+                        { backgroundColor: 'yellow' },
                         styles.rceAvatarDefault,
                         size && { width: size.width, height: size.height },
                     ]}
-                    source={this.props.src} />
+                    source={{ uri: this.props.src }} />
                 {this.props.sideElement}
             </View>
         );
