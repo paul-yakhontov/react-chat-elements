@@ -7,15 +7,16 @@ import {
     View,
     Text,
     Image,
+    TouchableOpacity
 } from 'react-native';
 
 export class ChatItem extends Component {
 
     render() {
         return (
-            <View
+            <TouchableOpacity
                 style={styles.rceContainerCitem}
-                onClick={this.props.onClick}
+                onPress={this.props.onPress}
                 onContextMenu={this.props.onContextMenu}>
                 <View style={styles.rceCitem}>
                     <View style={styles.rceCitemAvatar}>
@@ -25,13 +26,13 @@ export class ChatItem extends Component {
                             sideElement={
                                 this.props.statusColor &&
                                 <View
-                                    style={[styles.rceCitemStatus, {backgroundColor: this.props.statusColor}]}>
+                                    style={[styles.rceCitemStatus, { backgroundColor: this.props.statusColor }]}>
                                     <Text>
                                         {this.props.statusText}
                                     </Text>
                                 </View>
                             }
-                            type={'circle' && {'flexible': this.props.avatarFlexible}}/>
+                            type={'circle' && { 'flexible': this.props.avatarFlexible }} />
                     </View>
 
                     <View style={styles.rceCitemBody}>
@@ -77,14 +78,14 @@ export class ChatItem extends Component {
                         </View>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }
 
 ChatItem.defaultProps = {
     id: '',
-    onClick: null,
+    onPress: null,
     avatar: '',
     avatarFlexible: false,
     alt: '',
